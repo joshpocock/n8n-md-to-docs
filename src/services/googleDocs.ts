@@ -1,8 +1,10 @@
 import { google } from 'googleapis';
-import { logger } from 'firebase-functions/v2';
 import type { GoogleDocResponse } from '../types';
 import { convertMarkdownToDocx } from './docxConverter';
 import { Readable } from 'stream';
+
+// Use global logger if available, otherwise console
+const logger = (global as any).logger || console;
 
 export async function convertMarkdownToGoogleDoc(
   markdownContent: string, 
@@ -125,4 +127,4 @@ export async function convertMarkdownToGoogleDoc(
     });
     throw error;
   }
-} 
+}
