@@ -1,18 +1,16 @@
 {
   "name": "markdown-to-gdocs-function",
   "version": "1.0.0",
-  "description": "Firebase Function to convert Markdown to Google Docs",
-  "module": "src/index.ts",
+  "description": "Express server to convert Markdown to Google Docs",
+  "module": "src/server.ts",
   "type": "module",
   "scripts": {
-    "build": "bun build ./src/index.ts --outdir ./lib --target node && cp package.json lib/",
-    "build:watch": "bun build ./src/index.ts --outdir ./lib --target node --watch",
-    "serve": "bun run build && firebase emulators:start",
-    "shell": "bun run build && firebase functions:shell",
-    "start": "bun run shell",
-    "deploy": "firebase deploy --only functions",
-    "logs": "firebase functions:log",
-    "dev": "bun --watch src/index.ts"
+    "build": "bun build ./src/server.ts --outdir ./dist --target node",
+    "start": "node dist/server.js",
+    "dev": "bun --watch src/server.ts",
+    "firebase:build": "bun build ./src/index.ts --outdir ./lib --target node && cp package.json lib/",
+    "firebase:serve": "bun run firebase:build && firebase emulators:start",
+    "firebase:deploy": "firebase deploy --only functions"
   },
   "engines": {
     "node": "22"
@@ -21,8 +19,6 @@
     "cors": "^2.8.5",
     "docx": "^8.5.0",
     "express": "^4.18.2",
-    "firebase-admin": "^11.11.0",
-    "firebase-functions": "^4.5.0",
     "googleapis": "^128.0.0",
     "marked": "^11.1.0"
   },
@@ -31,8 +27,7 @@
     "@types/express": "^4.17.21",
     "@types/marked": "^5.0.2",
     "@types/node": "^18.0.0",
-    "bun-types": "latest",
-    "firebase-functions-test": "^3.1.0"
+    "bun-types": "latest"
   },
   "private": true
 }
