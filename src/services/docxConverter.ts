@@ -1,7 +1,9 @@
 import { Document, Paragraph, TextRun, HeadingLevel, Packer, AlignmentType, Table, TableRow, TableCell, BorderStyle } from 'docx';
 import { marked } from 'marked';
-import { logger } from 'firebase-functions/v2';
 import type { Token, Tokens } from 'marked';
+
+// Use global logger if available, otherwise console
+const logger = (global as any).logger || console;
 
 const headingLevelMap = {
   1: HeadingLevel.HEADING_1,
